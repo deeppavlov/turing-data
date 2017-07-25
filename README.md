@@ -1,2 +1,2 @@
 # turing-data
-Data from TUring.DeepHack
+Data from [DeepHack Turing](http://deephack.me) school-hackathon
