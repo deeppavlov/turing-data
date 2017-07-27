@@ -26,14 +26,16 @@ class LeaderBoard:
         for row in submission_reader:
             try:
                 dialog = int(row[0])
+                alice = float(row[1])
+                bob = float(row[2])
             except ValueError:
                 continue
             if dialog in self.users_bot_flags:
                 users_bot_fact_labels.append(self.users_bot_flags[dialog][0])
-                users_bot_predicted_probs.append(float(row[1]))
+                users_bot_predicted_probs.append(alice)
 
                 users_bot_fact_labels.append(self.users_bot_flags[dialog][1])
-                users_bot_predicted_probs.append(float(row[2]))
+                users_bot_predicted_probs.append(bob)
             else:
                 print("dialog %s not in dataset" % dialog, file=sys.stderr)
 
