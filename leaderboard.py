@@ -30,7 +30,7 @@ class LeaderBoard:
                 dialog = int(row[0])
                 alice = float(row[1])
                 bob = float(row[2])
-            except ValueError:
+            except (ValueError, IndexError):
                 continue
 
             if dialog in self.users_bot_flags and dialog not in used_dialogs:
