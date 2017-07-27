@@ -3,6 +3,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 from base64 import b64decode
+from urllib.parse import unquote
 
 from leaderboard import LeaderBoard
 
@@ -38,7 +39,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.do_AUTHHEAD()
                 self.wfile.write(bytes('not authenticated', encoding="utf-8"))
             content_length = int(self.headers['Content-Length'])
-            post_data = str(self.rfile.read(content_length))
+            post_data = unquote(str(self.rfile.read(content_length), encoding="utf-8"))
             is_valid, scoring = lb.score(post_data.split("\n"))
             if is_valid:
                 if tokens[auth] > 0:
