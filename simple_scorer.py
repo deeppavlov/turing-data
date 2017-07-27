@@ -42,8 +42,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             post_data = unquote(str(self.rfile.read(content_length), encoding="utf-8"))
             is_valid, scoring = lb.score(post_data.split("\n"))
             if is_valid:
-                if tokens[auth] > 0:
-                    tokens[auth] -= 1
+                if tokens[auth_token] > 0:
+                    tokens[auth_token] -= 1
                     self.wfile.write(bytes(scoring, encoding="utf-8"))
                 else:
                     self.wfile.write(bytes('too many tries', encoding="utf-8"))
