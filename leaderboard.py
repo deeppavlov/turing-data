@@ -24,7 +24,10 @@ class LeaderBoard:
 
         submission_reader = csv.reader(csv_lines, delimiter=',', quotechar='|')
         for row in submission_reader:
-            dialog = int(row[0])
+            try:
+                dialog = int(row[0])
+            except ValueError:
+                continue
             if dialog in self.users_bot_flags:
                 users_bot_fact_labels.append(self.users_bot_flags[dialog][0])
                 users_bot_predicted_probs.append(float(row[1]))
