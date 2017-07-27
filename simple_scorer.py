@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 from base64 import b64decode
 from urllib.parse import unquote
+from datetime import datetime
 
 from leaderboard import LeaderBoard
 
@@ -45,6 +46,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if tokens[auth_token] > 0:
                     tokens[auth_token] -= 1
                     self.wfile.write(bytes(scoring, encoding="utf-8"))
+                    with open("logs.txt", "wt") as f:
+                        f.write("%s\t%s\t%s\n" % (str(datetime.now()), auth_token, scoring))
                 else:
                     self.wfile.write(bytes('too many tries', encoding="utf-8"))
             else:
