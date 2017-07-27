@@ -22,6 +22,8 @@ class LeaderBoard:
         users_bot_fact_labels = []
         users_bot_predicted_probs = []
 
+        used_dialogs = set()
+
         submission_reader = csv.reader(csv_lines, delimiter=',', quotechar='|')
         for row in submission_reader:
             try:
@@ -30,12 +32,15 @@ class LeaderBoard:
                 bob = float(row[2])
             except ValueError:
                 continue
-            if dialog in self.users_bot_flags:
+
+            if dialog in self.users_bot_flags and dialog not in used_dialogs:
                 users_bot_fact_labels.append(self.users_bot_flags[dialog][0])
                 users_bot_predicted_probs.append(alice)
 
                 users_bot_fact_labels.append(self.users_bot_flags[dialog][1])
                 users_bot_predicted_probs.append(bob)
+
+                used_dialogs.add(dialog)
             else:
                 print("dialog %s not in dataset" % dialog, file=sys.stderr)
 
