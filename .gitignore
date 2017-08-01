@@ -1,3 +1,6 @@
 .idea/
 *.csv
 allowed_tokens.txt
+__pycache__/
+.ipynb_checkpoints/
+assessors.list
